@@ -97,8 +97,8 @@ def upload():
         logging.error(f"File type not allowed: {file.filename.rsplit('.', 1)[1].lower() if '.' in file.filename else 'No extension'}")  # Log file type not allowed
         return jsonify({"error": "File type not allowed"}), 400
 
-    # Use account name directly for filename
-    filename = f"{account}.png"
+    # Convert account name to lowercase for filename
+    filename = f"{account.lower()}.png"
     file_path = os.path.join(AVATAR_DIR, filename)
     file.save(file_path)
 
@@ -168,4 +168,3 @@ def create_thumbnails(file_path, filename):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
